@@ -34,7 +34,7 @@ Item {
 
     function openActionMenu(x, y) {
         var actionList = hasActionList ? model.actionList : [];
-        Tools.fillActionMenu(i18n, actionMenu, actionList, GridView.view.model.favoritesModel, model.favoriteId);
+        Tools.fillActionMenu(i18n, actionMenu, actionList, GridView.view.model.favoritesModel, model.favoriteId, plasmoid.immutability === PlasmaCore.Types.SystemImmutable);
         actionMenu.visualParent = item;
         actionMenu.open(x, y);
     }

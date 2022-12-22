@@ -52,6 +52,7 @@ T.ItemDelegate {
                 i18n, //i18n() function callback
                 view.model.favoritesModel,
                 model.favoriteId,
+                plasmoid.immutability === PlasmaCore.Types.SystemImmutable,
             );
             if (favoriteActions) {
                 if (allActions && allActions.length > 0) {

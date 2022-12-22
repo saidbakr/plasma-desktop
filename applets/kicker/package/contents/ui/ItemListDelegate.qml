@@ -42,7 +42,7 @@ Item {
 
     onAboutToShowActionMenu: {
         var actionList = item.hasActionList ? model.actionList : [];
-        Tools.fillActionMenu(i18n, actionMenu, actionList, ListView.view.model.favoritesModel, model.favoriteId);
+        Tools.fillActionMenu(i18n, actionMenu, actionList, ListView.view.model.favoritesModel, model.favoriteId, plasmoid.immutability === PlasmaCore.Types.SystemImmutable);
     }
 
     onActionTriggered: {

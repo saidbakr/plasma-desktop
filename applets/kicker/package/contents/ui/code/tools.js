@@ -8,11 +8,11 @@
 
 .pragma library
 
-function fillActionMenu(i18n, actionMenu, actionList, favoriteModel, favoriteId) {
+function fillActionMenu(i18n, actionMenu, actionList, favoriteModel, favoriteId, isImmutable) {
     // Accessing actionList can be a costly operation, so we don't
     // access it until we need the menu.
 
-    var actions = createFavoriteActions(i18n, favoriteModel, favoriteId);
+    var actions = createFavoriteActions(i18n, favoriteModel, favoriteId, isImmutable);
 
     if (actions) {
         if (actionList && actionList.length > 0) {
@@ -28,7 +28,7 @@ function fillActionMenu(i18n, actionMenu, actionList, favoriteModel, favoriteId)
     actionMenu.actionList = actionList;
 }
 
-function createFavoriteActions(i18n, favoriteModel, favoriteId) {
+function createFavoriteActions(i18n, favoriteModel, favoriteId, isImmutable) {
     if (favoriteModel === null || !favoriteModel.enabled || favoriteId === null) {
         return null;
     }

@@ -26,7 +26,7 @@ Item {
 
     onAboutToShowActionMenu: actionMenu => {
         const actionList = (model.hasActionList !== null) ? model.actionList : [];
-        Tools.fillActionMenu(i18n, actionMenu, actionList, repeater.model, model.favoriteId);
+        Tools.fillActionMenu(i18n, actionMenu, actionList, repeater.model, model.favoriteId, plasmoid.immutability === PlasmaCore.Types.SystemImmutable);
     }
 
     onActionTriggered: (actionId, actionArgument) => {
