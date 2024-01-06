@@ -112,6 +112,13 @@ SimpleKCM {
                 parent.device.leftHanded = checked
             }
         }
+        QQC2.CheckBox {
+            Kirigami.FormData.label: i18nd("kcm_tablet", "Relative mode:")
+            checked: parent.device && parent.device.relative
+            onCheckedChanged: {
+                parent.device.relative = checked
+            }
+        }
         QQC2.ComboBox {
             id: outputAreaCombo
             Layout.fillWidth: true

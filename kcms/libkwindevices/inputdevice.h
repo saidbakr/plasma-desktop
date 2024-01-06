@@ -29,6 +29,7 @@ class InputDevice : public QObject
     Q_PROPERTY(int orientation READ orientation WRITE setOrientation NOTIFY orientationChanged)
     Q_PROPERTY(QString outputName READ outputName WRITE setOutputName NOTIFY outputNameChanged)
     Q_PROPERTY(QRectF outputArea READ outputArea WRITE setOutputArea NOTIFY outputAreaChanged)
+    Q_PROPERTY(bool relative READ isRelative WRITE setRelative NOTIFY relativeChanged)
 
 public:
     InputDevice(const QString &dbusName, QObject *parent);
@@ -91,6 +92,13 @@ public:
 
     void setEnabled(bool enabled);
 
+    bool isRelative() const
+    {
+        return m_relative.value();
+    }
+
+    void setRelative(bool relative);
+
 Q_SIGNALS:
     void needsSaveChanged();
 
@@ -99,6 +107,7 @@ Q_SIGNALS:
     void outputNameChanged();
     void outputAreaChanged();
     void enabledChanged();
+    void relativeChanged();
 
 private:
     template<typename T>
@@ -214,6 +223,7 @@ private:
                                              &OrgKdeKWinInputDeviceInterface::defaultOutputArea,
                                              &OrgKdeKWinInputDeviceInterface::supportsOutputArea,
                                              &InputDevice::outputAreaChanged);
+    Prop<bool> m_relative = Prop<bool>(this, "relative", nullptr, nullptr, &InputDevice::relativeChanged);
 
     std::unique_ptr<OrgKdeKWinInputDeviceInterface> m_iface;
 };

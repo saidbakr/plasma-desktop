@@ -62,6 +62,7 @@ InputDevice::InputDevice(const QString &dbusName, QObject *parent)
     connect(this, &InputDevice::outputNameChanged, this, &InputDevice::needsSaveChanged);
     connect(this, &InputDevice::outputAreaChanged, this, &InputDevice::needsSaveChanged);
     connect(this, &InputDevice::enabledChanged, this, &InputDevice::needsSaveChanged);
+    connect(this, &InputDevice::relativeChanged, this, &InputDevice::needsSaveChanged);
 }
 
 void InputDevice::save()
@@ -71,11 +72,12 @@ void InputDevice::save()
     m_leftHanded.save();
     m_outputArea.save();
     m_enabled.save();
+    m_relative.save();
 }
 
 bool InputDevice::isSaveNeeded() const
 {
-    return m_leftHanded.changed() || m_orientation.changed() || m_outputName.changed() || m_outputArea.changed() || m_enabled.changed();;
+    return m_leftHanded.changed() || m_orientation.changed() || m_outputName.changed() || m_outputArea.changed() || m_enabled.changed() || m_relative.changed();
 }
 
 void InputDevice::defaults()
@@ -85,11 +87,13 @@ void InputDevice::defaults()
     m_outputName.resetFromDefaults();
     m_outputArea.resetFromDefaults();
     m_enabled.resetFromDefaults();
+    m_relative.resetFromDefaults();
 }
 
 bool InputDevice::isDefaults() const
 {
-    return m_leftHanded.isDefaults() && m_orientation.isDefaults() && m_outputName.isDefaults() && m_outputArea.isDefaults() && m_enabled.isDefaults();
+    return m_leftHanded.isDefaults() && m_orientation.isDefaults() && m_outputName.isDefaults() && m_outputArea.isDefaults() && m_enabled.isDefaults()
+        && m_relative.isDefaults();
 }
 
 void InputDevice::load()
@@ -99,6 +103,7 @@ void InputDevice::load()
     m_outputName.resetFromSaved();
     m_outputArea.resetFromSaved();
     m_enabled.resetFromSaved();
+    m_relative.resetFromSaved();
 }
 
 void InputDevice::setOrientation(int ori)
@@ -124,4 +129,9 @@ void InputDevice::setOutputArea(const QRectF &outputArea)
 void InputDevice::setEnabled(bool enabled)
 {
     m_enabled.set(enabled);
+}
+
+void InputDevice::setRelative(bool relative)
+{
+    m_relative.set(relative);
 }
