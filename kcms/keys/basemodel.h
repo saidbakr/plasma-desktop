@@ -61,7 +61,6 @@ public:
         CheckedRole,
         PendingDeletionRole,
         IsDefaultRole,
-        SupportsMultipleKeysRole,
     };
     Q_ENUM(Roles)
 
