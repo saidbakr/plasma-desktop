@@ -1,4 +1,5 @@
 kcoreaddons_add_plugin(kded_touchpad SOURCES kded.cpp INSTALL_NAMESPACE kf6/kded)
+kconfig_add_kcfg_files(kded_touchpad ../kdedsettings.kcfgc)
 
 target_link_libraries(kded_touchpad
     PRIVATE
@@ -7,7 +8,7 @@ target_link_libraries(kded_touchpad
     KF6::DBusAddons
     KF6::I18n
     KF6::Notifications
-    touchpad
+    touchpad_common
 )
 
 install(FILES kcm_touchpad.notifyrc
